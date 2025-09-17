@@ -1,4 +1,5 @@
 import "./App.css";
+import AddEducation from "./Components/AddEducation";
 
 function App() {
   return (
@@ -12,8 +13,7 @@ function App() {
       </div>
       <div className="resumeSection">
         <h2>Education</h2>
-        <p>Education Placeholder</p>
-        <button>Add Education</button>
+        <AddEducation />
         <br></br>
       </div>
       <div className="resumeSection">
