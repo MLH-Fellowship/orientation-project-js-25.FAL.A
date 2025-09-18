@@ -35,7 +35,7 @@ form {
 }
 
 form button {
-  width: fit-content; 
+  width: fit-content;
   align-self: center;
   margin-top: 10px;
 }
