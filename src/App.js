@@ -1,5 +1,5 @@
 import "./App.css";
-import AddEducation from "./Components/AddEducation";
+import AddEducation from "./Components/Education/AddEducation";
 
 function App() {
   return (

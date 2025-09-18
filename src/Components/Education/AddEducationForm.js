@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { addEducation } from "../../requests/education";
 
 function AddEducationForm({ setShowForm }) {
   const [form, setForm] = useState({
@@ -17,23 +18,7 @@ function AddEducationForm({ setShowForm }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(JSON.stringify(form));
-    try {
-      const response = await fetch(`.../resume/education`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
-      if (response.ok) {
-        alert("Education was added successfully!!");
-      } else {
-        alert("Failed to add the education");
-      }
-    } catch (error) {
-      console.error("Error adding education:", error);
-      alert("An error occurred while adding the education");
-    }
+    addEducation(form);
     setShowForm(false);
   };
 
