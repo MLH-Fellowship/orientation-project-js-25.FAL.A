@@ -83,14 +83,16 @@ form button {
   flex: 1;
 }
 
-.category-course, .category-company {
+.category-course,
+.category-company {
   font-size: 18px;
   font-weight: 600;
   margin: 0 0 8px 0;
   color: #333;
 }
 
-.category-school, .category-title {
+.category-school,
+.category-title {
   font-size: 16px;
   margin: 0 0 8px 0;
   color: #555;
@@ -102,7 +104,8 @@ form button {
   margin: 0 0 5px 0;
 }
 
-.category-grade, .category-description {
+.category-grade,
+.category-description {
   font-weight: 500;
   color: #444;
   margin: 0;
