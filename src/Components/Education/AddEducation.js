@@ -40,7 +40,7 @@ export default function AddEducation() {
   return (
     <section>
       {educationData.length === 0 && <p>No education data available.</p>}
-      <div className="education-wrapper">
+      <div className="category-wrapper">
         {!showForm &&
           educationData.map((edu, index) => (
             <DisplayEducation
