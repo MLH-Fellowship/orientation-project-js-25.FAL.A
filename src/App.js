@@ -1,5 +1,6 @@
 import "./App.css";
 import AddEducation from "./Components/Education/AddEducation";
+import AddSkill from "./Components/Skill/AddSkill";
 
 function App() {
   return (
@@ -18,8 +19,7 @@ function App() {
       </div>
       <div className="resumeSection">
         <h2>Skills</h2>
-        <p>Skill Placeholder</p>
-        <button>Add Skill</button>
+        <AddSkill />
         <br></br>
       </div>
       <br></br>
