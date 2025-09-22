@@ -1,6 +1,7 @@
 import { useState } from "react"
+import { addSkill } from "../../requests/skill"
 
-export default function AddSkillForm({ setShowForm }) {
+export default function AddSkillForm({ setShowForm, setSkillData }) {
     const [form, setForm] = useState({
         name: "",
         proficiency: "",
@@ -11,10 +12,18 @@ export default function AddSkillForm({ setShowForm }) {
         setForm({ ...form, [e.target.name]: e.target.value })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         console.log(JSON.stringify(form))
-        // API call will go here
+        
+        try {
+            await addSkill(form)
+        } catch (error) {
+            console.error("Backend not ready, adding locally:", error)
+            // Adding to local state until backend is ready
+            setSkillData(prev => [...prev, form])
+        }
+        
         setShowForm(false)
     }
 
@@ -35,14 +44,19 @@ export default function AddSkillForm({ setShowForm }) {
 
                 <div>
                     <label>Proficiency: </label>
-                    <input 
-                        type="text" 
+                    <select 
                         id="proficiency"
                         name="proficiency"
                         value={form.proficiency}
                         onChange={handleChange}
                         required
-                    />
+                    >
+                        <option value="">Select proficiency level</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                        <option value="Expert">Expert</option>
+                    </select>
                 </div>
 
                 <div>
