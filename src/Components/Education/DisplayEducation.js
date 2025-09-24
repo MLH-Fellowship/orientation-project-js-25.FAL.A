@@ -1,5 +1,3 @@
-import "./education.css";
-
 export default function DisplayEducation({
   course,
   school,
@@ -9,17 +7,17 @@ export default function DisplayEducation({
   logo,
 }) {
   return (
-    <div className="education-card">
-      <div className="education-logo">
+    <div className="category-card">
+      <div className="category-logo">
         <img src={logo} alt={`${school} logo`} />
       </div>
-      <div className="education-info">
-        <h3 className="education-course">{course}</h3>
-        <h4 className="education-school">{school}</h4>
-        <p className="education-dates">
+      <div className="category-info">
+        <h3 className="category-course">{course}</h3>
+        <h4 className="category-school">{school}</h4>
+        <p className="category-dates">
           {start_date} - {end_date}
         </p>
-        <p className="education-grade">{grade}</p>
+        <p className="category-grade">{grade}</p>
       </div>
     </div>
   );
