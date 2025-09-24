@@ -36,19 +36,14 @@ export default function AddSkillForm({ setShowForm }) {
 
                 <div>
                     <label>Proficiency: </label>
-                    <select 
+                    <input 
+                        type="text" 
                         id="proficiency"
                         name="proficiency"
                         value={form.proficiency}
                         onChange={handleChange}
                         required
-                    >
-                        <option value="">Select proficiency level</option>
-                        <option value="Beginner">Beginner</option>
-                        <option value="Intermediate">Intermediate</option>
-                        <option value="Advanced">Advanced</option>
-                        <option value="Expert">Expert</option>
-                    </select>
+                    />
                 </div>
 
                 <div>
