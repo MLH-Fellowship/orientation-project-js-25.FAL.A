@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { addSkill } from "../../requests/skill"
 
-export default function AddSkillForm({ setShowForm, setSkillData }) {
+export default function AddSkillForm({ setShowForm }) {
     const [form, setForm] = useState({
         name: "",
         proficiency: "",
@@ -15,15 +15,7 @@ export default function AddSkillForm({ setShowForm, setSkillData }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         console.log(JSON.stringify(form))
-        
-        try {
-            await addSkill(form)
-        } catch (error) {
-            console.error("Backend not ready, adding locally:", error)
-            // Adding to local state until backend is ready
-            setSkillData(prev => [...prev, form])
-        }
-        
+        await addSkill(form)
         setShowForm(false)
     }
 
