@@ -1,10 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddInfoForm from "./AddInfoForm";
 import DisplayInfo from "./DisplayInfo";
+import { getInfo } from "../../requests/info";
 
 export default function AddInfo() {
   const [showForm, setShowForm] = useState(false);
   const [infoData, setInfoData] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await getInfo();
+        setInfoData(data);
+      } catch (error) {
+        console.error("Error fetching user info:", error);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <section>
