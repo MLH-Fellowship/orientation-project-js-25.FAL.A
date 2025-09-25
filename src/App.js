@@ -41,6 +41,10 @@ function App() {
       .catch((error) => console.error("Spellcheck error:", error));
   };
 
+  const filteredResults = spellcheckResults.filter(
+    (result) => result.after.length > 0
+  );
+
   return (
     <div className="App">
       <h1>Resume Builder</h1>
@@ -67,20 +71,17 @@ function App() {
       {spellcheckResults && (
         <div>
           <h2>Spellcheck Results:</h2>
-          {spellcheckResults
-            .filter((result) => result.after.length > 0)
-            .map((result, index) => (
-              <div key={index}>
-                <p>
-                  <strong>Original word:</strong> {result.before}
-                </p>
-                <p>
-                  <strong>Suggested word:</strong> {result.after.join(", ")}
-                </p>
-              </div>
-            ))}
-          {spellcheckResults.filter((result) => result.after.length > 0)
-            .length === 0 && <p>No spelling mistakes found!</p>}
+          {filteredResults.map((result, index) => (
+            <div key={index}>
+              <p>
+                <strong>Original word:</strong> {result.before}
+              </p>
+              <p>
+                <strong>Suggested word:</strong> {result.after.join(", ")}
+              </p>
+            </div>
+          ))}
+          {filteredResults.length === 0 && <p>No spelling mistakes found!</p>}
         </div>
       )}
 
