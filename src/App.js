@@ -41,9 +41,9 @@ function App() {
       .catch((error) => console.error("Spellcheck error:", error));
   };
 
-  const filteredResults = spellcheckResults.filter(
-    (result) => result.after.length > 0
-  );
+  const filteredResults = spellcheckResults
+    ? spellcheckResults.filter((result) => result.after.length > 0)
+    : [];
 
   return (
     <div className="App">
