@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { addExperience } from "../../requests/experience";
+import { suggestDescription } from "../../requests/ai";
 
 function AddExperienceForm({ setShowForm }) {
   const [form, setForm] = useState({
@@ -11,6 +12,9 @@ function AddExperienceForm({ setShowForm }) {
     logo: "",
   });
 
+  const [aiSuggestion, setAiSuggestion] = useState("");
+  const [isLoadingAI, setIsLoadingAI] = useState(false);
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -20,6 +24,31 @@ function AddExperienceForm({ setShowForm }) {
     console.log(JSON.stringify(form));
     addExperience(form);
     setShowForm(false);
+  };
+
+  const handleImproveDescription = async () => {
+    if (!form.description.trim()) {
+      return;
+    }
+
+    setIsLoadingAI(true);
+    try {
+      const result = await suggestDescription(form.description, "experience");
+      setAiSuggestion(result.suggestion);
+    } catch (error) {
+      console.error("Failed to get AI suggestion");
+    } finally {
+      setIsLoadingAI(false);
+    }
+  };
+
+  const acceptAISuggestion = () => {
+    setForm({ ...form, description: aiSuggestion });
+    setAiSuggestion("");
+  };
+
+  const rejectAISuggestion = () => {
+    setAiSuggestion("");
   };
 
   return (
@@ -71,7 +100,7 @@ function AddExperienceForm({ setShowForm }) {
           />
         </div>
 
-        <div>
+        <div className="category-description">
           <label>Description: </label>
           <input
             id="description"
@@ -79,7 +108,29 @@ function AddExperienceForm({ setShowForm }) {
             value={form.description}
             onChange={handleChange}
           />
+          <button
+            type="button"
+            onClick={handleImproveDescription}
+            disabled={isLoadingAI || !form.description.trim()}
+          >
+            {isLoadingAI ? "Improving..." : "Improve with AI"}
+          </button>
         </div>
+
+        {aiSuggestion && (
+          <div>
+            <p>AI Suggestion:</p>
+            <p>{aiSuggestion}</p>
+            <div className="button-group">
+              <button type="button" onClick={acceptAISuggestion}>
+                Accept
+              </button>
+              <button type="button" onClick={rejectAISuggestion}>
+                Reject
+              </button>
+            </div>
+          </div>
+        )}
 
         <div>
           <label>Logo URL: </label>
